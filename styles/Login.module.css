@@ -7,6 +7,10 @@
     margin-top: 7%;
 }
 
+.forms{
+    display:inline-block;
+}
+
 .icon_play{
     max-width: 4rem;
     max-height: 4rem;
@@ -39,6 +43,7 @@
     border-radius: 5px;
     padding-left: 20px;
     color: #032228;
+    display: block;
 }
 
 .forms select{
@@ -53,9 +58,9 @@
     width: 350px;
     height: 50px;
     box-shadow: 0 3px 16px 0 rgb(0 0 0 / 80%);
-    margin-top: 20px;
+    margin-top: 45px;
     margin-bottom: 20px;
-  
+    display: block;
 }
 
 .forms select option{
