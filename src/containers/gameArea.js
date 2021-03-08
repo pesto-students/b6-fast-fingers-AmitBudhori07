@@ -2,18 +2,27 @@ import React,{useState,useEffect} from 'react';
 import Timer from 'src/containers/timerUserInuput';
 import ScoreList from 'src/components/scoreList';
 import GameOver from 'src/components/gameOver';
+import { postScore } from 'service/userApi';
+import { mutate } from 'swr';
+import {useScore} from 'data/useUser';
 
 
 function GameArea({isGameOver,finalScore,onGameover,clearState}){
     const [highScore, SetHighScore] = useState(0);
-    const [scoreList,setScoreList] = useState([]);
+    const [scorelist,setScoreList] = useState([]);
+    const { scores } =  useScore(); 
 
-    useEffect(() => {
-        finalScore ? setScoreList([...scoreList,finalScore]):null;
+    useEffect(async() => {
+        if(finalScore) {
+          await postScore('/fastfinger/postScore',finalScore);
+          mutate('/fastfinger/scorelist')
+        }
         if (finalScore > highScore) {
             SetHighScore(finalScore)
           }
     }, [isGameOver])
+
+    if (scores==='undefined') return "Loading...";
 
     return(
         <>
@@ -24,7 +33,7 @@ function GameArea({isGameOver,finalScore,onGameover,clearState}){
               <div className="mt-2">
                 <h5 className="text mb-2">SCORE BOARD</h5>
                 <hr />
-                {<ScoreList scorelist={scoreList} highScore={highScore} />}
+                {<ScoreList scorelist={scores ? scores : []} highScore={highScore} />}
               </div>
             </div>
           </div>

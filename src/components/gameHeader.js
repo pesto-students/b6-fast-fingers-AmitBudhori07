@@ -1,22 +1,26 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React,{useEffect,useState} from 'react';
 import Score from 'src/containers/score';
 
 
 function GameHeader({isGameOver,setFinalScore}) {
-    const router = useRouter();
-    const { name, level } = router.query
+/*     const { name, level } = {...localStorage}
+ */   
+   const [user,setUser] = useState({name:'',level:''})
+    useEffect(() => {
+        const { name, level } = {...localStorage};
+        setUser({name:name,level:level})
+    }, [])
     return (
         <>
             <div className="row">
                 <div className="col-sm-9">
                     <h3 className="text text-heading">
                         <img className="icon-player" src="/person.png" alt="Player" width="40" height="40" />
-                        {name}</h3>
+                        {user.name}</h3>
                     <br />
                     <h3 className="text text-heading">
                         <img className="icon-player" src="/gamepad.png" alt="GamePad" width="40" height="40" />
-            LEVEL: {level}</h3>
+            LEVEL: {user.level}</h3>
                 </div>
                 <div className="col-sm-3">
                     <h3 className="text text-heading">fast fingers</h3>

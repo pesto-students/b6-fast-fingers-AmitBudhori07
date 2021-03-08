@@ -20,7 +20,7 @@ export function setLevel(difficultyFactor){
     if (difficultyFactor >= 2) level = 'HARD';
     else if (difficultyFactor < 1.5) level = 'EASY';
     else level = 'MEDIUM';
-
+    localStorage.setItem("level",level);
     return level;
 }
 

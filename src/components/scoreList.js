@@ -1,9 +1,11 @@
 import React from 'react';
-import formatTime from 'src/constants/formatTime'
+import formatTime from 'src/constants/formatTime';
+import {useScore} from 'data/useUser'
 
 
-function ScoreList({ scorelist,highScore }) {
-    const highScoreIndex = scorelist.indexOf(highScore);
+function ScoreList({ scorelist}) {
+    const highScore = [...scorelist].sort((a,b)=>a - b)[scorelist.length-1];
+    const highScoreIndex = scorelist.indexOf(highScore)
     const scoresList = scorelist.map((score, i) => (
         <div key={i}>
             <p className="high-score-text">
@@ -25,4 +27,11 @@ function ScoreList({ scorelist,highScore }) {
     return scoresList;
 }
 
+ScoreList.getInitialProps = (context) => {
+    const activeCategory = context.query;
+     
+    return {
+      activeCategory: activeCategory,
+    };
+  };
 export default ScoreList;

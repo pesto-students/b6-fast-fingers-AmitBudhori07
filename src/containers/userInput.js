@@ -7,11 +7,8 @@ import { GetNewWord, TimeForWord } from 'src/constants/getNewWords';
 
 
 function UserInput({setTime,setTimeForword}) {
-    const router = useRouter();
-    const { name, level } = router.query;
-
     const [{difficulty,userText,currentWord},dispatch] =useReducer((state, newState) => ({...state, ...newState}), {
-     difficulty:{level:level,factor:DifficultyFactor(level)},
+     difficulty:{level:'',factor:1},
      userText:'',
      currentWord:''
     });
@@ -31,13 +28,10 @@ function UserInput({setTime,setTimeForword}) {
     }
 
     useEffect(() => {
-        router.push(`/Game?name=${name}&level=${difficulty.level}`, undefined, { shallow: true })
-    }, [difficulty.level])
-
-    useEffect(() => {
-        let word = GetNewWord(difficulty.level);
+        const {level} = {...localStorage}
+        let word = GetNewWord(level);
         TimeForWord(word, setTimeForword, setTime, difficulty.factor);
-        dispatch({currentWord:word});
+        dispatch({difficulty:{level:level,factor:DifficultyFactor(level)},currentWord:word});
    }, [])
 
 

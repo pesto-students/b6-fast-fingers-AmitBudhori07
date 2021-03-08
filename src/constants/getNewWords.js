@@ -1,6 +1,7 @@
 export let WordStore = {};
 
 export function getWordStore(props){
+    console.log(props)
 WordStore=props
 }
 
