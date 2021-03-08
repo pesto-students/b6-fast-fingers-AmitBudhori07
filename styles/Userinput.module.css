@@ -1,0 +1,22 @@
+  .text_align{
+      text-align: center;
+  }
+
+  .input_box {
+    background-color: rgba(245, 245, 245, 0.404);
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    text-transform: uppercase;
+    max-width: 70%;
+    padding-left: 10px;
+    text-align: center;
+  }
+  
+  .input_box:focus {
+    border: none;
+    outline: none;
+  }
